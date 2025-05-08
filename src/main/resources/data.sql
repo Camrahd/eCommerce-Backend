@@ -1,3 +1,11 @@
+CREATE DATABASE IF NOT EXISTS ecommerce;
+USE ecommerce;
+
+-- Create MySQL user and grant permissions
+CREATE USER IF NOT EXISTS 'appuser'@'%' IDENTIFIED BY 'apppassword';
+GRANT ALL PRIVILEGES ON ecommerce.* TO 'appuser'@'%';
+FLUSH PRIVILEGES;
+
 -- Create user table
 CREATE TABLE IF NOT EXISTS user (
                                     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,11 +35,11 @@ CREATE TABLE IF NOT EXISTS product (
 CREATE TABLE IF NOT EXISTS cart (
                                     id INT AUTO_INCREMENT PRIMARY KEY,
                                     amount DOUBLE NOT NULL,
-                                    category_id INT NOT NULL,
-                                    product_id INT NOT NULL,
-                                    user_id INT NOT NULL,
-                                    quantity INT NOT NULL,
-                                    address VARCHAR(255),
+                                    category_id INT,
+                                    product_id INT,
+                                    user_id INT,
+                                    quantity INT,
+                                    address VARCHAR(255),  -- Changed back to 'address'
     FOREIGN KEY (category_id) REFERENCES category(id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
@@ -42,17 +50,17 @@ CREATE TABLE IF NOT EXISTS orders (
                                       id INT AUTO_INCREMENT PRIMARY KEY,
                                       user_id INT,
                                       product_id INT,
-                                      address VARCHAR(255) NOT NULL,
+                                      address VARCHAR(255) NOT NULL,  -- Changed from 'delivery_address' to 'address'
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
     );
 
 -- Insert sample data into user
-INSERT INTO user (name, email, password) VALUES
-                                             ('Dharma', 'dharma@gmail.com', '12345'),
-                                             ('Alice', 'alice@gmail.com', '12345'),
-                                             ('Bob', 'bob@gmail.com', '12345');
+-- INSERT INTO user (name, email, password) VALUES
+--                                              ('Dharma', 'dharma@gmail.com', '12345'),
+--                                              ('Alice', 'alice@gmail.com', '12345'),
+--                                              ('Bob', 'bob@gmail.com', '12345');
 
 -- Insert sample data into category
 INSERT INTO category (name) VALUES

@@ -262,6 +262,7 @@ public class ecommercecontroller {
         cart.setProduct(productEntity);
         cart.setAmount(cartRequestDTO.getAmount());
         cart.setAddress(cartRequestDTO.getAddress());
+        cart.setQuantity(1); // Default quantity if not provided by frontend
 
         // Save to DB
         Cart savedCart = cartRepository.save(cart);

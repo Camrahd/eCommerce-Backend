@@ -27,8 +27,17 @@ public class Cart {
 
     private double amount;
     private String address;
+   // @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
-    // Getters and Setters
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+// Getters and Setters
 
     public int getId() {
         return id;
